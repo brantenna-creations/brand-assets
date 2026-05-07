@@ -2,145 +2,169 @@
 ================================================================================
 DAIMA LUXURY LIMITED :: UNIFIED EMAIL TEMPLATE
 ================================================================================
-Version:        1.0.0
+Version:        2.0.0
 Date:           2026-05-07
 Source of Truth: github.com/brantenna-creations/brand-assets/email-template.html
 Maintained by:  Brantenna Creations
 
-ARCHITECTURAL CHANGE:
-This file replaces the signature pattern entirely. Previous design had body
-text and signature as separate visual elements. This design wraps the entire
-email (logo header, body content, footer block) inside a single bordered
-card. This is the architecture used by transactional emails from premium
-service providers (HostPinnacle, banks, hotel groups, airlines).
+Changes in 2.0.0:
+  Visual depth and mobile fidelity were lacking in 1.0.0. The flat all-white
+  rendering on mobile produced a faded appearance because the card border
+  was too subtle to register on small screens, and the footer block read
+  as continuous with the body. 2.0.0 introduces three structural changes:
 
-INSTALLATION:
-1. The template is registered as a Roundcube Response named "Daima Email".
-2. The auto-signature in the identity is cleared (set to empty).
-3. During compose: insert the response, click inside the body cell, replace
-   the placeholder line with the message, send.
+  1. Outer wrapper: a full-width off-white background (#F4F2EE) frames the
+     card. The white card now sits on a tinted surface, giving it visible
+     edge definition on every screen size.
 
-The result is a unified bordered card where the body content sits visually
-integrated with the logo header above and the contact footer below. There
-is no visual disconnection between body and signature because they share
-one container.
+  2. Stronger card border: the card border darkens from #E0DDD8 to #C8C5C0,
+     and the top maroon stripe thickens from 2px to 3px. Brand colour
+     remains a precision detail rather than a heavy block, but it now
+     registers on mobile.
 
-ELIMINATES THE "--" DELIMITER ISSUE:
-Roundcube only inserts the RFC 3676 delimiter when an auto-signature is
-configured. With the auto-signature cleared, no delimiter appears.
+  3. Tinted footer section: contact line, address, links, hairline, and
+     copyright sit on a subtle off-white background (#FAF9F6). This
+     visually separates the footer from the body without introducing a
+     heavy colour block.
 
-LAYOUT (top to bottom inside the card):
-  - 2-pixel maroon top stripe
+  Additional refinements:
+  - Visible placeholder text removed. Body cell holds an invisible
+    non-breaking space that the user replaces by typing. No selection
+    or deletion required.
+  - Hairline divider colour darkens from #E0DDD8 to #D4D1CB for visibility.
+  - All Western hospitality terminology removed. Footer carries only
+    contact data and action links, no labels.
+
+USAGE WORKFLOW:
+  Fresh composition: Compose -> Responses -> Daima Email -> click in the
+  body area -> type message -> send.
+  Reply to external email: Reply -> Responses -> Daima Email -> the
+  template inserts at cursor (top), quoted original sits below -> click
+  in the body area -> type reply -> send.
+  Both flows use a single click on the Responses button. There is no
+  automatic-attachment mode in Roundcube; the Insert Response click is
+  required per message regardless of composition or reply.
+
+LAYOUT (top to bottom):
+  - Outer wrapper: off-white background, full width
+  - Card border (1px #C8C5C0)
+  - Top maroon stripe (3px)
   - Logo (180px centred)
-  - Tagline in Georgia italic
+  - Tagline (Georgia italic charcoal)
   - Hairline divider
-  - BODY AREA (placeholder text, replaced at compose time)
+  - BODY AREA (invisible placeholder, replaced by user input)
   - Hairline divider
-  - Contact line (phone, WhatsApp, web)
-  - Postal address
-  - Three uppercase action links
-  - Hairline divider
-  - Copyright in tiny caps
+  - Footer section (subtle off-white #FAF9F6 background):
+      Contact line (phone, WhatsApp, web)
+      Postal address
+      Three uppercase action links
+      Hairline divider
+      Copyright in tiny caps
 
 DESIGN CONSTRAINTS:
-  - Single bordered card, max-width 640px, centred
-  - 1px hairline border (#E0DDD8) for the card itself
-  - White background throughout
-  - Inline styles only, table-based layout
-  - No media queries, no images other than the logo
-  - Compatible with Outlook desktop, Gmail, Apple Mail, mobile
+  - Tables only (Outlook desktop compatibility)
+  - Inline styles only
+  - No CSS gradients, no SVG inline, no media queries, no JavaScript
+  - All hairlines via nested-table border-top pattern
+  - Single column at all viewport widths
 ================================================================================
 -->
-<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Segoe UI', sans-serif; max-width: 640px; margin: 0 auto; padding: 0; border-collapse: collapse; border: 1px solid #E0DDD8; background-color: #FFFFFF;">
-
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #F4F2EE; padding: 24px 12px; border-collapse: collapse;">
   <tr>
-    <td style="background-color: #7A1C1C; height: 2px; line-height: 2px; font-size: 1px;">&nbsp;</td>
-  </tr>
+    <td align="center" style="padding: 0;">
 
-  <tr>
-    <td style="background-color: #FFFFFF; padding: 36px 24px 18px 24px;" align="center">
-      <img src="https://cdn.jsdelivr.net/gh/brantenna-creations/brand-assets@main/Logo-Web.png" alt="Daima Luxury" width="180" style="display: block; border: 0; max-width: 180px; height: auto; margin: 0 auto;">
-    </td>
-  </tr>
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Segoe UI', sans-serif; max-width: 640px; margin: 0 auto; background-color: #FFFFFF; border: 1px solid #C8C5C0; border-collapse: collapse;">
 
-  <tr>
-    <td style="background-color: #FFFFFF; padding: 0 24px 30px 24px;" align="center">
-      <span style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 13px; color: #1A1A1A; font-style: italic; letter-spacing: 2px;">Every Journey Is a Statement</span>
-    </td>
-  </tr>
-
-  <tr>
-    <td style="background-color: #FFFFFF; padding: 0 60px;">
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
         <tr>
-          <td style="border-top: 1px solid #E0DDD8; line-height: 1px; font-size: 1px;">&nbsp;</td>
+          <td style="background-color: #7A1C1C; height: 3px; line-height: 3px; font-size: 1px;">&nbsp;</td>
         </tr>
-      </table>
-    </td>
-  </tr>
 
-  <tr>
-    <td style="background-color: #FFFFFF; padding: 36px 40px 36px 40px;">
-      <p style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Segoe UI', sans-serif; font-size: 14px; color: #2A2A2A; line-height: 1.7; margin: 0; padding: 0;">
-        <em style="color: #B8B8B8;">Click here. Replace this line with your message. Press Enter for new paragraphs. Add a closing such as "Kind regards" and your name.</em>
-      </p>
-    </td>
-  </tr>
-
-  <tr>
-    <td style="background-color: #FFFFFF; padding: 0 60px;">
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
         <tr>
-          <td style="border-top: 1px solid #E0DDD8; line-height: 1px; font-size: 1px;">&nbsp;</td>
+          <td style="background-color: #FFFFFF; padding: 36px 24px 18px 24px;" align="center">
+            <img src="https://cdn.jsdelivr.net/gh/brantenna-creations/brand-assets@main/Logo-Web.png" alt="Daima Luxury" width="180" style="display: block; border: 0; max-width: 180px; height: auto; margin: 0 auto;">
+          </td>
         </tr>
-      </table>
-    </td>
-  </tr>
 
-  <tr>
-    <td align="center" style="padding: 26px 24px 8px 24px; background-color: #FFFFFF;">
-      <span style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Segoe UI', sans-serif; font-size: 13px; color: #2A2A2A; line-height: 1.9; letter-spacing: 0.5px;">
-        <a href="tel:+254722892255" style="color: #2A2A2A; text-decoration: none;">+254 722 892 255</a>
-        <span style="color: #B8B8B8; padding: 0 10px;">|</span>
-        <a href="https://wa.me/254722892255" style="color: #2A2A2A; text-decoration: none;">WhatsApp</a>
-        <span style="color: #B8B8B8; padding: 0 10px;">|</span>
-        <a href="https://daimaluxury.co.ke" style="color: #2A2A2A; text-decoration: none;">daimaluxury.co.ke</a>
-      </span>
-    </td>
-  </tr>
-
-  <tr>
-    <td align="center" style="padding: 0 24px 26px 24px; background-color: #FFFFFF;">
-      <span style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Segoe UI', sans-serif; font-size: 11px; color: #6B6B6B; letter-spacing: 1px;">P.O. Box 1214, 20100, Nakuru, Kenya</span>
-    </td>
-  </tr>
-
-  <tr>
-    <td align="center" style="padding: 0 24px 30px 24px; background-color: #FFFFFF;">
-      <span style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Segoe UI', sans-serif; font-size: 11px; color: #7A1C1C; letter-spacing: 2px; font-weight: 700; text-transform: uppercase;">
-        <a href="https://daimaluxury.co.ke" style="color: #7A1C1C; text-decoration: none;">Visit Website</a>
-        <span style="color: #B8B8B8; padding: 0 12px;">|</span>
-        <a href="https://daimaluxury.co.ke/services" style="color: #7A1C1C; text-decoration: none;">Our Services</a>
-        <span style="color: #B8B8B8; padding: 0 12px;">|</span>
-        <a href="https://daimaluxury.co.ke/contact" style="color: #7A1C1C; text-decoration: none;">Reservations</a>
-      </span>
-    </td>
-  </tr>
-
-  <tr>
-    <td style="background-color: #FFFFFF; padding: 0 60px;">
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
         <tr>
-          <td style="border-top: 1px solid #E0DDD8; line-height: 1px; font-size: 1px;">&nbsp;</td>
+          <td style="background-color: #FFFFFF; padding: 0 24px 32px 24px;" align="center">
+            <span style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 13px; color: #1A1A1A; font-style: italic; letter-spacing: 2px;">Every Journey Is a Statement</span>
+          </td>
         </tr>
+
+        <tr>
+          <td style="background-color: #FFFFFF; padding: 0 60px;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+              <tr>
+                <td style="border-top: 1px solid #D4D1CB; line-height: 1px; font-size: 1px;">&nbsp;</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="background-color: #FFFFFF; padding: 36px 40px 36px 40px;">
+            <p style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Segoe UI', sans-serif; font-size: 14px; color: #2A2A2A; line-height: 1.7; margin: 0; padding: 0;">&nbsp;</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="background-color: #FFFFFF; padding: 0 60px;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+              <tr>
+                <td style="border-top: 1px solid #D4D1CB; line-height: 1px; font-size: 1px;">&nbsp;</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td align="center" style="padding: 28px 24px 10px 24px; background-color: #FAF9F6;">
+            <span style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Segoe UI', sans-serif; font-size: 13px; color: #2A2A2A; line-height: 1.9; letter-spacing: 0.5px;">
+              <a href="tel:+254722892255" style="color: #2A2A2A; text-decoration: none;">+254 722 892 255</a>
+              <span style="color: #B8B8B8; padding: 0 10px;">|</span>
+              <a href="https://wa.me/254722892255" style="color: #2A2A2A; text-decoration: none;">WhatsApp</a>
+              <span style="color: #B8B8B8; padding: 0 10px;">|</span>
+              <a href="https://daimaluxury.co.ke" style="color: #2A2A2A; text-decoration: none;">daimaluxury.co.ke</a>
+            </span>
+          </td>
+        </tr>
+
+        <tr>
+          <td align="center" style="padding: 0 24px 28px 24px; background-color: #FAF9F6;">
+            <span style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Segoe UI', sans-serif; font-size: 11px; color: #6B6B6B; letter-spacing: 1px;">P.O. Box 1214, 20100, Nakuru, Kenya</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td align="center" style="padding: 0 24px 30px 24px; background-color: #FAF9F6;">
+            <span style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Segoe UI', sans-serif; font-size: 11px; color: #7A1C1C; letter-spacing: 2px; font-weight: 700; text-transform: uppercase;">
+              <a href="https://daimaluxury.co.ke" style="color: #7A1C1C; text-decoration: none;">Visit Website</a>
+              <span style="color: #B8B8B8; padding: 0 12px;">|</span>
+              <a href="https://daimaluxury.co.ke/services" style="color: #7A1C1C; text-decoration: none;">Our Services</a>
+              <span style="color: #B8B8B8; padding: 0 12px;">|</span>
+              <a href="https://daimaluxury.co.ke/contact" style="color: #7A1C1C; text-decoration: none;">Reservations</a>
+            </span>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="background-color: #FAF9F6; padding: 0 60px;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+              <tr>
+                <td style="border-top: 1px solid #D4D1CB; line-height: 1px; font-size: 1px;">&nbsp;</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td align="center" style="padding: 14px 24px 22px 24px; background-color: #FAF9F6;">
+            <span style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Segoe UI', sans-serif; font-size: 9px; color: #999999; letter-spacing: 2px; text-transform: uppercase;">&copy; Daima Luxury Limited &nbsp;&middot;&nbsp; All Rights Reserved</span>
+          </td>
+        </tr>
+
       </table>
+
     </td>
   </tr>
-
-  <tr>
-    <td align="center" style="padding: 14px 24px 18px 24px; background-color: #FFFFFF;">
-      <span style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Segoe UI', sans-serif; font-size: 9px; color: #999999; letter-spacing: 2px; text-transform: uppercase;">&copy; Daima Luxury Limited &nbsp;&middot;&nbsp; All Rights Reserved</span>
-    </td>
-  </tr>
-
 </table>
